@@ -27,6 +27,9 @@ class Day01 {
         }
 
         println("Elf ${max.first} has ${max.second} calories")
+
+        // NOTE: If we didn't want the index, we could have just done
+        // println(list.maxOrNull())
     }
 
     fun puzzle2() {
@@ -34,7 +37,7 @@ class Day01 {
 
         // only need to know the top3, we don't need to know the index, so just sort and take top 3
         list.sortDescending()
-        val top3 = list.take(3).reduce { sum, x -> sum + x} // slightly more elegant/functional than //val top3 = list[0]+list[1]+list[2]
+        val top3 = list.take(3).sum() // slightly more elegant/functional than //val top3 = list[0]+list[1]+list[2]
         println("Top3 Elves are carrying $top3 Calories")
     }
 }
