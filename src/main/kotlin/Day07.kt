@@ -17,7 +17,8 @@ class Day07 {
 
         fun dirSize():Int = files.fold(0){ acc, f ->  acc + f.size} + subDirs.fold(0) {acc, dir -> acc + dir.dirSize() }
     }
-    val dirStack = ArrayDeque<Dir>()
+    private val dirStack = ArrayDeque<Dir>()
+
     init {
         dirStack.push(Dir("/"))
         file.readLines().forEach {
