@@ -30,11 +30,10 @@ class Day08 {
         val bestScore =
             (1 until treeGrid.size-1).maxOf { y ->
                 (1 until treeGrid[y].size-1).maxOf { x ->
-                    // minOf deals with adding the tree that it is blocked by, but not adding an additional +1 if at the edge of the map
-                    minOf((x-1 downTo 0).takeWhile { leftX -> treeGrid[y][leftX] < treeGrid[y][x] }.count() + 1, (x-1 downTo 0).count()) *
-                    minOf((y-1 downTo 0).takeWhile { upY -> treeGrid[upY][x] < treeGrid[y][x] }.count() + 1, (y-1 downTo 0).count()) *
-                    minOf((x+1 until treeGrid[y].size).takeWhile { rightX -> treeGrid[y][rightX] < treeGrid[y][x] }.count() + 1, (x+1 until treeGrid[y].size).count()) *
-                    minOf((y+1 until treeGrid.size).takeWhile { downY -> treeGrid[downY][x] < treeGrid[y][x] }.count() + 1, (y+1 until treeGrid.size).count())
+                    ((x-1 downTo 1).takeWhile { leftX -> treeGrid[y][leftX] < treeGrid[y][x] }.count() + 1) *
+                    ((y-1 downTo 1).takeWhile { upY -> treeGrid[upY][x] < treeGrid[y][x] }.count() + 1) *
+                    ((x+1 until treeGrid[y].size-1).takeWhile { rightX -> treeGrid[y][rightX] < treeGrid[y][x] }.count() + 1) *
+                    ((y+1 until treeGrid.size-1).takeWhile { downY -> treeGrid[downY][x] < treeGrid[y][x] }.count() + 1)
                 }
             }
         println("Part 2 Ans: $bestScore")
