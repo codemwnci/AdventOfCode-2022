@@ -41,7 +41,7 @@ class Day15 {
     }
 
     fun puzzle1() {
-        println(signals.map { it.noBeaconRange(2_000_000).filter { p -> it.beacon != p } }.flatten().toSet().count())
+        println("Part 1 Ans: " + signals.map { it.noBeaconRange(2_000_000).filter { p -> it.beacon != p } }.flatten().toSet().count())
     }
 
     fun puzzle2() {
@@ -59,7 +59,7 @@ class Day15 {
                 }
             }
         }
-        println(distressBeacon) //12625383204261
+        println("Part 2 Ans: $distressBeacon") //12625383204261
     }
 
     private fun canDistressBeaconBeAt(pos: Point): Boolean = signals.all { (sensor, beacon) ->
