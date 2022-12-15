@@ -53,7 +53,7 @@ class Day15 {
                 val vertical = scanningDistance - horizontal
                 val p = Point(it.sensor.x + horizontal, it.sensor.y + vertical)
                 p.neighbours(4_000_000, 4_000_000).forEach {
-                    if (canDistressBeaconBeAt(it)) {
+                    if (isDistressBeaconAt(it)) {
                         distressBeacon = (it.x * bounds) + it.y
                     }
                 }
@@ -62,10 +62,10 @@ class Day15 {
         println("Part 2 Ans: $distressBeacon") //12625383204261
     }
 
-    private fun canDistressBeaconBeAt(pos: Point): Boolean = signals.all { (sensor, beacon) ->
-        when (pos) {
+    private fun isDistressBeaconAt(p: Point): Boolean = signals.all { (sensor, beacon) ->
+        when (p) {
             beacon -> false
-            else -> calcDistance(pos, sensor) > calcDistance(sensor, beacon)
+            else -> calcDistance(p, sensor) > calcDistance(sensor, beacon)
         }
     }
 }
