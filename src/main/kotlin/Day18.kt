@@ -60,7 +60,6 @@ class Day18 {
         println("Part 2 Ans: $sum")
     }
 
-
     // This approach DOES work. It simulates water coming from the origin, and fills each point, and then
     // attempts the same on all in-boundary neighbouring points (except if it encounters the shape). This prevents the search from
     // going _inside_ the shape
