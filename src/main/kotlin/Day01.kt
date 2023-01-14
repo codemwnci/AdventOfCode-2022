@@ -8,15 +8,14 @@ fun main() {
 class Day01 {
     private val file = File("inputs/day01.txt")
 
-    private fun getCalorieList(): MutableList<Int> {
-        val list = mutableListOf(0)
-        file.readLines().forEach {
-            if (it.isEmpty()) list.add(0)                          // add new item to tail if we find a blank line
-            else list[list.lastIndex] = list.last() + it.toInt()   // otherwise incremement the tail with the read value
+    fun <T> List<T>.split(predicate: (T) -> Boolean): List<List<T>> =
+        fold(mutableListOf(mutableListOf<T>())) { acc, t ->
+            if (predicate(t)) acc.add(mutableListOf())
+            else acc.last().add(t)
+            acc
         }
-        return list
-    }
 
+    private fun getCalorieList(): List<Int> = file.readLines().split { it.isBlank() }.map { subList -> subList.sumOf { it.toInt() } }
 
     fun puzzle1() {
         val list = getCalorieList()
@@ -33,11 +32,10 @@ class Day01 {
     }
 
     fun puzzle2() {
-        val list = getCalorieList()
+        val list = getCalorieList().toMutableList()
 
         // only need to know the top3, we don't need to know the index, so just sort and take top 3
-        list.sortDescending()
-        val top3 = list.take(3).sum() // slightly more elegant/functional than //val top3 = list[0]+list[1]+list[2]
+        val top3 = list.sortedDescending().take(3).sum()
         println("Top3 Elves are carrying $top3 Calories")
     }
 }
